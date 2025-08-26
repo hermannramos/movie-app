@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchPopularMovies } from "./moviesThunks.js";
+import { fetchPopularMovies, fetchPlayingNowMovies } from "./moviesThunks.js";
 
 const initialState = {
     popularMovies: [],
+    nowPlayingMovies: [],
 };
 
 const moviesSlice = createSlice({
@@ -14,6 +15,10 @@ const moviesSlice = createSlice({
             .addCase(fetchPopularMovies.fulfilled, (state, action) => {
                 state.popularMovies = action.payload;
             })
+
+            .addCase(fetchPlayingNowMovies.fulfilled, (state, action) => {
+                state.nowPlayingMovies = action.payload;
+            });
     }
 });
 

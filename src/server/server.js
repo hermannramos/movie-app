@@ -32,6 +32,32 @@ app.get("/api/movies/popular", async (request, response) => {
     }
 });
 
+app.get("/api/movies/now_playing", async (request, response) => {
+    try{
+        const requestedLimit = Number(request.query.limit) || 5;
+        const safeLimit = Math.max(1, Math.min(25, requestedLimit));
+
+        const tmdbUrl = "https://api.themoviedb.org/3/movie/now_playing?language=es-ES&page=1"
+        const tmdbResponse = await fetch(tmdbUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${process.env.TMDB_API_TOKEN}`,
+            }
+        });
+        const tmdbData = await tmdbResponse.json();
+
+        const allMovies = Array.isArray(tmdbData?.results) ? tmdbData.results : [];
+        const limitedMovies = allMovies.slice(0, safeLimit);
+
+        const payload = {...tmdbData, results: limitedMovies};
+        response.status(tmdbResponse.ok ? 200 : tmdbResponse.status).json(payload);
+    } catch(error){
+        console.error("TMDB request failed:", error);
+        response.status(500).json({error: "TMDB request failed"});
+    }
+});
+
 app.use((error, _request, response) => {
     console.error('[error]', error);
     response.status(500).json({error: 'Unexpected error'});
