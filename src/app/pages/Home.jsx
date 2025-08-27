@@ -1,11 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPopularMovies, fetchPlayingNowMovies } from "../features/moviesThunks";
+import "../../styles/home.scss";
 
 const Home = () => {
     const dispatch = useDispatch();
-    const popularMovies = useSelector((state) => state.movies.popularMovies);
+    // const popularMovies = useSelector((state) => state.movies.popularMovies);
     const nowPlayingMovies = useSelector((state) => state.movies.nowPlayingMovies);
+    const heroMovie = nowPlayingMovies && nowPlayingMovies[0];
+    const heroImage = 
+        heroMovie?.backdrop_path
+        ? `https://image.tmdb.org/t/p/w1280${heroMovie.backdrop_path}`
+        : (heroMovie?.poster_path ? `https://image.tmdb.org/t/p/w780${heroMovie.poster_path}` : '');
+
 
     useEffect(() => {
         dispatch(fetchPopularMovies(10));
@@ -14,22 +21,19 @@ const Home = () => {
 
     return (
         <div className="home-container">
-            <h2>Popular Movies</h2>
-            <div className="movies-popular-container">
-                {popularMovies.map((movie) => (
-                    <div className="movie-item" key={movie.id}>
-                        <h4>{movie.title}</h4>
+            {heroMovie && (
+                <section className="banner">
+                    <div className="banner-bg" style={{backgroundImage: `url(${heroImage})`}} />
+                    <div className="banner-content">
+                        <h1 className="banner-title">{heroMovie.title}</h1>
+                        <p className="banner-overview">{heroMovie.overview}</p>
+                        <div className="banner-actions">
+                            <button type="button">Ver detalles</button>
+                            <button></button>
+                        </div>
                     </div>
-                ))}
-            </div>
-            <h2>Now Playing Movies</h2>
-            <div className="movies-popular-container">
-                {nowPlayingMovies.map((movie) => (
-                    <div className="movie-item" key={movie.id}>
-                        <h4>{movie.title}</h4>
-                    </div>
-                ))}
-            </div>
+                </section>
+            )}
         </div>
     )
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/navbar.scss";
 
 export const Navbar = () => {
     return (
@@ -9,7 +10,7 @@ export const Navbar = () => {
             <nav>
                 <ul className="nav-menu">
                     <li className="nav-group">
-                        <span className="nav-label">Movies</span>
+                        <span className="nav-label" tabIndex={0}>Movies</span>
                         <ul className="nav-sublist">
                             <li>Popular</li>
                             <li>Top Rated</li>

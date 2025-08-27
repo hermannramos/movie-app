@@ -1,0 +1,123 @@
+.nav-menu,
+.nav-sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor principal del header */
+.container-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #12161d;
+  border-bottom: 1px solid #202938;
+  padding: 15px 25px;
+  border-radius: 30px;
+
+  /* centrado y layout */
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+
+  .logo {
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    /* si mantienes <img>, dale tamaño */
+    img {
+      width: 120px;
+      height: auto;
+      display: block;
+    }
+  }
+
+nav {
+    flex: 1; /* que el nav ocupe espacio intermedio */
+    justify-items: center;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-group {
+  position: relative; /* para posicionar la sublista respecto al grupo */
+}
+
+.nav-label {
+  cursor: pointer;
+  color: #ffffff;
+}
+
+/* Oculta por defecto */
+.nav-sublist {
+  display: none;
+  position: absolute;
+  top: 100%; /* debajo del label */
+  left: 0;
+  padding: 8px 10px;
+  background: #12161d;
+  border: 1px solid #202938;
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.35);
+  min-width: 180px;
+  color: #ffffff;
+
+  /* vertical */
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+
+  li { white-space: nowrap; }
+}
+
+/* Mostrar al pasar el mouse o al enfocar con teclado */
+.nav-group:hover > .nav-sublist,
+.nav-group:focus-within > .nav-sublist,
+.nav-label:hover + .nav-sublist,
+.nav-label:focus + .nav-sublist {
+  display: flex;
+}
+
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    button {
+      background: #e50914;
+      color: #ffffff;
+      border: 1px solid #b20710;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: transform 0.12s ease, background 0.12s ease;
+
+      &:hover { transform: translateY(-1px); }
+      &:active { transform: translateY(0); background: #c40811; }
+    }
+  }
+}
+
+/* Responsive simple */
+@media (max-width: 900px) {
+  .container-header {
+    .nav-menu .nav-group .nav-sublist { display: none; }
+  }
+}
+
+@media (max-width: 600px) {
+  .container-header {
+    gap: 12px;
+
+    .logo { font-size: 14px; }
+    .nav-menu { gap: 16px; }
+  }
+}
