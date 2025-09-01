@@ -1,0 +1,31 @@
+.rated-slider{
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+};
+.rated-list{
+    display: flex;
+    gap: 15px;
+};
+.top-carousel{
+    display: flex;
+    flex: 0 0 24%;
+    flex-direction: column;
+};
+.rated-poster{
+    display: block;
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 10px;
+};
+.rated-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6px;
+};
+.button-actions{
+    display: flex;
+    gap: 6px;
+};

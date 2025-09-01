@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Heart, Info } from "lucide-react";
 import "../../styles/poster-carousel.scss";
+import { useNavigate } from "react-router-dom";
 
 function getImgMovie(movie) {
   return `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
-}
+};
 
 export const PosterSlider = ({ movies }) => {
+  const navigate = useNavigate();
   const VISIBLE = 4;
   const [slide, setSlide] = useState(0);
 
@@ -33,18 +35,16 @@ export const PosterSlider = ({ movies }) => {
           <div className="carousel" key={movie.id}>
             <img src={getImgMovie(movie)} alt={movie.title} className="poster-carousel" />
             <div className="carousel-content">
-              <h3>{movie.title}</h3>
+              <h4>{movie.title}</h4>
               <div className="button-actions">
-                <button type="button"><Info size={18} /></button>
-                <button type="button"><Heart size={18} /></button>
+                <button type="button" onClick={() => navigate(`/${movie.id}`)}><Info size={15} /></button>
+                <button type="button"><Heart size={15} /></button>
               </div>
             </div>
           </div>
         ))}
       </div>
-
       <ChevronRight size={22} className="arrow arrow-right" onClick={nextSlide} />
     </div>
   );
 };
-
