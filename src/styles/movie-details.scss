@@ -1,15 +1,65 @@
 .movie-container{
-    margin: 10px auto;
+  margin: 0px auto;
 };
+
 .movie-details{
-    display: flex;
-    flex-direction: row;
-    flex: 0 0 40%;
-    gap: 30px;
-    padding: 2% 8%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 35% 1fr;
+  gap: 54px;
+  padding: 5% 10%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 };
+
 .poster-image img{
-    border-radius: 30px;
-    box-shadow: 0px 0px 10px #666;
-    object-fit: cover;
-}
+  display: block;
+  border-radius: 30px;
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(0,0,0,.35);
+};
+
+.movie-info{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+};
+
+.movie-header .extra-data{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 30px;
+};
+
+.movie-overview{
+  display: flex;
+  flex-direction: column;
+};
+
+.movie-creators{
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+};
+
+.extra-movie-info{
+  display: grid;
+  grid-template-columns: 1fr 25%;
+  gap: 25px;
+  padding: 3% 5%;
+};
+
+.actors-gallery{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+};
+
+.actor-card img{
+  display: block;
+  object-fit: cover;
+  border-radius: 15px;
+};

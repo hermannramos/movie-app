@@ -103,6 +103,25 @@ app.get("/api/movies/:movieId", async(request, response) => {
     }
 });
 
+app.get("/api/movies/:movieId/credits", async(request, response) => {
+    try{
+        const { movieId } = request.params;
+        const creditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?language=es-ES`;
+        const creditsResponse = await fetch(creditsUrl, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${process.env.TMDB_API_TOKEN}`,
+            },
+        });
+        const creditsData = await creditsResponse.json();
+        response.status(creditsResponse.ok ? 200 : creditsResponse.status).json(creditsData);
+    } catch (error){
+        console.error("TMDB request failed:", error);
+        response.status(500).json({error: "TMDB request failed"});
+    }
+});
+
 app.use((error, _request, response) => {
     console.error('[error]', error);
     response.status(500).json({error: 'Unexpected error'});

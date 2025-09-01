@@ -35,3 +35,12 @@ export const fetchMovieDetails = createAsyncThunk("movies/fetchMovieDetails", as
     const data = await response.json();
     return data;
 });
+
+export const fetchMovieCredits = createAsyncThunk("movies/fetchMovieCredits", async(movieId) => {
+    const response = await fetch(`/api/movies/${movieId}/credits`);
+    if(!response.ok){
+        throw new Error(`HTTP ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+});
