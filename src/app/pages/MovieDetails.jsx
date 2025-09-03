@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toggleListMovie } from "../features/moviesSlice.js";
 import {  useParams } from "react-router-dom";
 import { fetchMovieDetails, fetchMovieCredits } from "../features/moviesThunks.js";
 import "../../styles/movie-details.scss";
@@ -10,18 +11,19 @@ const MovieDetails = () => {
 
     const movie = useSelector((state) => state.movies.movieDetails);
     const credits = useSelector((state) => state.movies.movieCredits);
-    const castList = Array.isArray(credits?.cast) ? credits.cast.slice(0, 10) : [];
-    const genres = Array.isArray(movie.genres) ? movie.genres.slice(0, 3).map(gender => gender.name).join (", ") : "";
 
-    const director = credits?.crew?.find((c) => c.job === "Director");
-    const producer = credits?.crew?.find((c) => c.job === "Producer");
-
+    
     useEffect(() => {
         dispatch(fetchMovieDetails(movieId))
         dispatch(fetchMovieCredits(movieId))
     }, [dispatch, movieId]);
     
     if(!movie) return null;
+    
+    const castList = Array.isArray(credits?.cast) ? credits.cast.slice(0, 10) : [];
+    const genres = Array.isArray(movie.genres) ? movie.genres.slice(0, 3).map(g => g.name).join (", ") : "";
+    const director = credits?.crew?.find((c) => c.job === "Director");
+    const producer = credits?.crew?.find((c) => c.job === "Producer");
 
     return (
         <div className="movie-container">
@@ -40,18 +42,18 @@ const MovieDetails = () => {
                             </div>
                         </div>
                         <div className="button-actions">
-                            <button type="button">Add to Wishlist</button>
+                            <button type="button" onClick={() => dispatch(toggleListMovie(movie))}>Add to Wishlist</button>
                         </div>
                         <div className="movie-overview">
                             <h2>Sinopsis</h2>
                             <p>{movie.overview}</p>
                             <div className="movie-creators">
                                 <div className="director">
-                                    <p>{director.name}</p>
+                                    <p>{director?.name || ""}</p>
                                     <h4>Director</h4>
                                 </div>
                                 <div className="producer">
-                                    <p>{producer.name}</p>
+                                    <p>{producer?.name || ""}</p>
                                     <h4>Productor</h4>
                                 </div>
                             </div>

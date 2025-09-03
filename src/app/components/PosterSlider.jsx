@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { toggleListMovie } from "../features/moviesSlice.js";
 import { ChevronLeft, ChevronRight, Heart, Info } from "lucide-react";
 import "../../styles/poster-carousel.scss";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function getImgMovie(movie) {
   return `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
@@ -9,6 +11,7 @@ function getImgMovie(movie) {
 
 export const PosterSlider = ({ movies }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const VISIBLE = 4;
   const [slide, setSlide] = useState(0);
 
@@ -38,7 +41,7 @@ export const PosterSlider = ({ movies }) => {
               <h4>{movie.title}</h4>
               <div className="button-actions">
                 <button type="button" onClick={() => navigate(`/${movie.id}`)}><Info size={15} /></button>
-                <button type="button"><Heart size={15} /></button>
+                <button type="button" onClick={() => dispatch(toggleListMovie(movie))}><Heart size={15} /></button>
               </div>
             </div>
           </div>

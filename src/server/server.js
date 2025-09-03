@@ -6,6 +6,30 @@ const app = express();
 app.use(express.json());
 const port = Number(process.env.PORT) || 5180;
 
+app.get("/api/search", async (request, response) => {
+    try{
+        const searchQuery = (request.query.q || "").toString().trim();
+        if(!searchQuery) return response.json({ results: [] });
+
+        const searchUrl = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(searchQuery)}&language=es-ES&page=1`;
+        const searchResponse = await fetch(searchUrl, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${process.env.TMDB_API_TOKEN}`,
+            },
+        });
+
+        const searchData = await searchResponse.json();
+        const limitedResults = Array.isArray(searchData.results) ? searchData.results.slice(0, 8) : [];
+
+        response.status(searchResponse.ok ? 200 : searchResponse.status).json({ results: limitedResults });
+    } catch (error){
+        console.error("TMDB search error:", error);
+        response.status(500).json({ error: "TMDB request failed" });
+    }
+});
+
 app.get("/api/movies/popular", async (request, response) => {
     try{
         const requestedLimit = Number(request.query.limit) || 10;

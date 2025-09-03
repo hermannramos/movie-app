@@ -6,3 +6,10 @@ export const store = configureStore({
         movies: moviesReducer,
     }
 });
+
+store.subscribe(() => {
+    try {
+        const { wishlist } = store.getState().movies;
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    } catch { /* empty */ }
+});

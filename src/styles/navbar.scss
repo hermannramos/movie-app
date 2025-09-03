@@ -106,6 +106,135 @@ nav {
   }
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-box {
+  position: relative;
+  width: 260px;
+}
+
+.search-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid #2a3240;
+  background: #0f141b;
+  color: #e9eef4;
+  outline: none;
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  background: #0f141b;
+  border: 1px solid #2a3240;
+  border-radius: 8px;
+  padding: 6px;
+  display: grid;
+  gap: 6px;
+  z-index: 10;
+  max-height: 360px;
+  overflow: auto;
+}
+
+.search-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border: 0;
+  background: transparent;
+  color: #e9eef4;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.search-item:hover {
+  background: #121a24;
+}
+
+.search-item img {
+  width: 36px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #1c2430;
+}
+
+.search-item-texts {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+}
+
+.search-title { font-size: 14px; }
+.search-year  { font-size: 12px; color: #9fb3c8; }
+
+.wishlist-box { position: relative; }
+
+.wishlist-button {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #2a3240;
+  background: #0f141b;
+  color: #e9eef4;
+  cursor: pointer;
+}
+
+.wishlist-dropdown {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  width: 320px;
+  background: #0f141b;
+  border: 1px solid #2a3240;
+  border-radius: 8px;
+  padding: 8px;
+  z-index: 15;
+  display: grid;
+  gap: 8px;
+  max-height: 380px;
+  overflow: auto;
+}
+
+.wishlist-item {
+  display: grid;
+  grid-template-columns: 48px 1fr 24px;
+  gap: 8px;
+  align-items: center;
+}
+
+.wishlist-thumb img {
+  width: 48px; height: 72px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+  background: #1c2430;
+}
+
+.wishlist-texts { cursor: pointer; }
+.wishlist-title { display: block; font-size: 14px; color: #e9eef4; }
+.wishlist-year  { display: block; font-size: 12px; color: #9fb3c8; }
+
+.wishlist-remove {
+  width: 24px; height: 24px;
+  border: 0; border-radius: 6px;
+  background: #1a212c; color: #e9eef4;
+  cursor: pointer;
+}
+
+
+
 /* Responsive simple */
 @media (max-width: 900px) {
   .container-header {

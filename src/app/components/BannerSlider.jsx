@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { toggleListMovie } from "../features/moviesSlice.js";
 import { ChevronLeft, ChevronRight, Heart, Info } from "lucide-react";
-import "../../styles/banner-slider.scss";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import "../../styles/banner-slider.scss";
 
 function getMovieImg(movie) {
     return `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`;
 };
 
 export const BannerSlider = ({movies}) => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [slide, setSlide] = useState(0);
 
@@ -34,8 +37,8 @@ export const BannerSlider = ({movies}) => {
                     <h2>{movie.title}</h2>
                     <p>{movie.overview}</p>
                     <div className="button-actions">
-                        <button type="button"><Info size={18} style={{marginRight: 8}} onClick={() => navigate(`/${movie.id}`)}/>View Details</button>
-                        <button type="button"><Heart size={18} style={{marginRight: 8}} />Add To Wishlist</button>
+                        <button type="button" onClick={() => navigate(`/${movie.id}`)}><Info size={18} style={{marginRight: 8}}/>View Details</button>
+                        <button type="button" onClick={() => dispatch(toggleListMovie(movie))}><Heart size={18} style={{marginRight: 8}} />Add To Wishlist</button>
                     </div>
                 </div>
             </div>
