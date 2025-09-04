@@ -1,31 +1,166 @@
+:root { --rankColW: clamp(56px, 8vw, 88px); --posterRadius: 12px; --cardGap: 18px; --rankSize: clamp(88px, 12vw, 180px); --rankStroke: 4px; }
+.rank-number,
+.rated-title,
+.rated-actions button {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .rated-slider{
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
-};
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;        /* <- estira hijos a la misma altura */
+  gap: var(--cardGap);
+  padding-inline: 8px;
+}
+.rated-header{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 180px;
+  height: 100%;                /* <- ocupa la altura del contenedor */
+}
+
+.rated-header h2{
+  margin: 0;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+/* separador vertical */
+.rated-divider{
+  margin-top: 12px;
+  width: 3px;
+  flex: 1;                     /* <- llena el alto restante bajo el h2 */
+  border-radius: 3px;
+  background: linear-gradient(180deg, #A020F0 0%, #FF007F 100%);
+}
 .rated-list{
-    display: flex;
-    gap: 15px;
+  flex: 1;                     /* <- toma el espacio restante */
+  display: flex;
+  gap: 15px;
+}
+
+/* cada card será un grid 2x2 */
+.top-card {
+  display: grid;
+  grid-template-columns: var(--rankColW) 1fr; /* columna izquierda: número, derecha: póster */
+  grid-template-rows: auto auto;  /* fila superior: media, fila inferior: meta */
+  grid-template-areas:
+    "num img"
+    "gap img";
+  position: relative;
+  border-radius: var(--posterRadius);
+}
+
+/* asignar áreas */
+.rank-wrap   { grid-area: num / num / gap / num; display: flex; align-items: flex-end; overflow: visible; z-index: 0; justify-content: flex-end; border-radius: var(--posterRadius); }
+.poster-wrap { grid-area: img; position: relative; z-index: 1; overflow: hidden; border-radius: var(--posterRadius); }
+.rank-gap    { grid-area: gap; visibility: hidden; }
+
+.poster-wrap::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0; height: 46%;
+  background: linear-gradient(0deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,0) 60%);
+  pointer-events: none;
+  border-bottom-left-radius: var(--posterRadius);
+  border-bottom-right-radius: var(--posterRadius);
+  border-radius: var(--posterRadius);
 };
-.top-carousel{
-    display: flex;
-    flex: 0 0 24%;
-    flex-direction: column;
+
+.rank-number {
+  font-size: var(--rankSize);
+  font-weight: 600;
+  line-height: .9;
+  color: #fff;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translateX(20px); 
+}
+
+.rank-poster {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  border-radius: var(--posterRadius);
 };
-.rated-poster{
-    display: block;
-    width: 100%;
-    aspect-ratio: 2/3;
-    object-fit: cover;
-    border-radius: 10px;
+
+.rated-title {
+  grid-area: img;       /* misma área que el póster */
+  align-self: end;      /* lo coloca abajo */
+  justify-self: stretch;
+  padding: 10px 10px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  z-index: 2;
+  position: relative;   /* para estar sobre la imagen */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+}
+
+.rated-title::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 48%;                /* cuánto “sube” el degradado */
+  background: linear-gradient(0deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,0) 70%);
+  z-index: -1;                /* detrás del texto, encima de la imagen */
+  border-radius: var(--posterRadius);
+}
+
+.rated-actions{
+  grid-column: img;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 6px;
+  gap: 6px;
 };
-.rated-content{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 6px;
-};
-.button-actions{
-    display: flex;
-    gap: 6px;
-};
+
+.rated-actions .score {
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+.rated-actions button[type="button"] {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+.rated-arrows {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;              /* cambia a right:10px si las quieres abajo-derecha */
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+}
+
+.rated-arrow {
+  width: 34px; height: 34px;
+  display: grid; place-items: center;
+  border-radius: 8px;
+  background: rgba(20,22,28,0.72);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+  cursor: pointer;
+  transition: transform .15s ease, opacity .15s ease;
+  opacity: .95;
+}
+.rated-arrow:hover { transform: translateY(-2px); opacity: 1; }

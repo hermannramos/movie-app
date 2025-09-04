@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromList } from "../features/moviesSlice.js";
 
@@ -53,7 +53,9 @@ export const Navbar = () => {
     return (
         <div className="container-header">
             <div className="logo">
-                <img src={LogoApp} alt="" />
+                <Link to="/">
+                    <img src={LogoApp} alt="" />
+                </Link>
             </div>
             <nav>
                 <ul className="nav-menu">

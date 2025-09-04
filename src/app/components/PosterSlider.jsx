@@ -3,7 +3,7 @@ import { toggleListMovie } from "../features/moviesSlice.js";
 import { ChevronLeft, ChevronRight, Heart, Info } from "lucide-react";
 import "../../styles/poster-carousel.scss";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function getImgMovie(movie) {
   return `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
@@ -12,6 +12,9 @@ function getImgMovie(movie) {
 export const PosterSlider = ({ movies }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const wishList = useSelector((state) => state.movies.wishList);
+
   const VISIBLE = 4;
   const [slide, setSlide] = useState(0);
 
@@ -29,6 +32,10 @@ export const PosterSlider = ({ movies }) => {
     return movies[index];
   });
 
+  const isInWishlist = (movie) => {
+    return wishList.some((m) => m.id === movie.id);
+  }
+
   return (
     <div className="poster-slider">
         <h2>Popular Movies</h2>
@@ -36,12 +43,14 @@ export const PosterSlider = ({ movies }) => {
       <div className="poster-row">
         {itemsToShow.map((movie) => (
           <div className="carousel" key={movie.id}>
-            <img src={getImgMovie(movie)} alt={movie.title} className="poster-carousel" />
+            <div className="poster-card">
+              <img src={getImgMovie(movie)} alt={movie.title} className="poster-img" />
+              <div className="poster-title">{movie.title}</div>
+            </div>
             <div className="carousel-content">
-              <h4>{movie.title}</h4>
-              <div className="button-actions">
+              <div className="carousel-button-actions">
                 <button type="button" onClick={() => navigate(`/${movie.id}`)}><Info size={15} /></button>
-                <button type="button" onClick={() => dispatch(toggleListMovie(movie))}><Heart size={15} /></button>
+                <button type="button" onClick={() => dispatch(toggleListMovie(movie))} className={isInWishlist(movie) ? "wishlist active" : "wishlist"}><Heart size={15} fill={isInWishlist(movie) ? "currentColor" : "none"}/></button>
               </div>
             </div>
           </div>

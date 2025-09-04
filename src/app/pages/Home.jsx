@@ -26,13 +26,13 @@ const Home = () => {
                 )}
             </div>
             <div className="section-carousel">
-                {popularMovies.length > 0 && (
-                    <PosterSlider movies={popularMovies} />
+                {topRatedMovies.length > 0 && (
+                    <RatingSlider movies={topRatedMovies} />
                 )}
             </div>
             <div className="section-carousel">
-                {topRatedMovies.length > 0 && (
-                    <RatingSlider movies={topRatedMovies} />
+                {popularMovies.length > 0 && (
+                    <PosterSlider movies={popularMovies} />
                 )}
             </div>
         </div>

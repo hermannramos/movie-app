@@ -41,9 +41,6 @@ const MovieDetails = () => {
                                 <h4>{genres}</h4>
                             </div>
                         </div>
-                        <div className="button-actions">
-                            <button type="button" onClick={() => dispatch(toggleListMovie(movie))}>Add to Wishlist</button>
-                        </div>
                         <div className="movie-overview">
                             <h2>Sinopsis</h2>
                             <p>{movie.overview}</p>
@@ -57,6 +54,9 @@ const MovieDetails = () => {
                                     <h4>Productor</h4>
                                 </div>
                             </div>
+                        </div>
+                        <div className="details-button-actions">
+                            <button type="button" onClick={() => dispatch(toggleListMovie(movie))}>Add to Wishlist</button>
                         </div>
                     </div>
                 </div>
