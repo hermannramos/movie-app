@@ -22,10 +22,8 @@ export const RatingSlider = ({ movies }) => {
 
     return (
         <div className="rated-slider">
-            <div className="rated-header">
-                <h2><Film size={20} style={{marginRight: 8, verticalAlign: "middle"}}/> Top Rated Movies</h2>
-                <div className="rated-divider"></div>
-            </div>
+            <h2><Film size={30} style={{marginRight: 8, verticalAlign: "middle"}}/> Top Rated Movies</h2>
+            <div className="rated-divider"></div>
             <div className="rated-list">
                 {moviesToShow.map(({movie, rank}) => (
                     <div className="top-card" key={movie.id}>

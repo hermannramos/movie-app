@@ -2,7 +2,22 @@
     box-sizing: border-box;
 }
 
-body{
-    margin: 0px auto;
-    background-color: #1c1c1c;;
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+
+  /* Degradado oscuro con más contraste */
+  background: linear-gradient(
+    135deg,
+    #0b0b0f 0%,     /* casi negro azulado */
+    #1a1c26 30%,    /* gris azulado más claro */
+    #222436 65%,    /* púrpura grisáceo */
+    #2d1f3d 100%    /* púrpura oscuro */
+  );
+
+  /* Fallback */
+  background-color: #1c1c1c;
+
+  color: #e9eef4;
+  min-height: 100vh;
 }

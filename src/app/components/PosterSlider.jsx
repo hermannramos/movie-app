@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toggleListMovie } from "../features/moviesSlice.js";
-import { ChevronLeft, ChevronRight, Heart, Info } from "lucide-react";
+import { ChevronLeft, ChevronRight, Heart, Info, TrendingUp } from "lucide-react";
 import "../../styles/poster-carousel.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,7 +38,7 @@ export const PosterSlider = ({ movies }) => {
 
   return (
     <div className="poster-slider">
-        <h2>Popular Movies</h2>
+      <h2><TrendingUp size={22} style={{ marginRight: 12, color: "#FFD700"}}/>Popular Movies</h2>
       <ChevronLeft size={22} className="arrow arrow-left" onClick={prevSlide} />
       <div className="poster-row">
         {itemsToShow.map((movie) => (

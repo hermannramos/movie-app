@@ -49,7 +49,6 @@ export const Navbar = () => {
         setWishListOpen(false);
     };
 
-
     return (
         <div className="container-header">
             <div className="logo">
@@ -98,7 +97,7 @@ export const Navbar = () => {
                 <div className="wishlist-box">
                     <button type="button" onClick={() => setWishListOpen((v) => !v)} className="wishlist-button">
                         <span className="wishlist-icon">
-                            <Heart size={18} aria-hidden="true" />
+                            <Heart size={18}/>
                             <span className="wishlist-count">{wishListMovies.length}</span>
                         </span>
                         <span className="wishlist-label">Wishlist</span>
