@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toggleListMovie } from "../features/moviesSlice.js";
-import { ChevronLeft, ChevronRight, Heart, Info } from "lucide-react";
+import { ChevronLeft, ChevronRight, Heart, Info, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "../../styles/banner-slider.scss";
@@ -34,6 +34,10 @@ export const BannerSlider = ({movies}) => {
             <div className={slide === index ? "slide" : " slide slide-hidden"} key={movie.id}>
                 <img src={getMovieImg(movie)} alt={movie.title}  className="img-banner"/>
                 <div className="banner-content">
+                    <div className="banner-rating">
+                        <Star size={18} fill="#FFD700" stroke="#FFD700" />
+                        <span>{Math.round(movie.vote_average * 10) / 10}</span>
+                    </div>
                     <h2>{movie.title}</h2>
                     <p>{movie.overview}</p>
                     <div className="button-actions">

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { removeFromList } from "../features/moviesSlice.js";
-import "../../styles/navbar.scss";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { removeFromList } from "../features/moviesSlice.js";
+
+import { Search, Heart } from "lucide-react";
+import LogoApp from "../../assets/logo-movie-app.png";
+import "../../styles/navbar.scss";
 
 function getMovieImg(path){
     return `https://image.tmdb.org/t/p/w92${path}`;
@@ -46,11 +49,12 @@ export const Navbar = () => {
         setWishListOpen(false);
     };
 
-
     return (
         <div className="container-header">
             <div className="logo">
-                <img src="" alt="" />
+                <Link to="/">
+                    <img src={LogoApp} alt="" />
+                </Link>
             </div>
             <nav>
                 <ul className="nav-menu">
@@ -74,6 +78,7 @@ export const Navbar = () => {
             </nav>
             <div className="header-actions">
                 <div className="search-box">
+                    <Search className="search-icon" size={16} aria-hidden="true" />
                     <input type="text" className="search-input" placeholder="Buscar película..."  value={searchQuery} onChange={handleSearch}/>
                     {searchQuery && searchResults.length > 0 && (
                         <div className="search-dropdown">
@@ -82,7 +87,7 @@ export const Navbar = () => {
                                     <img src={getMovieImg(movie.poster_path)} alt={movie.title} />
                                     <div className="search-item-texts">
                                         <span className="search-title">{movie.title}</span>
-                                        <span className="search-year">{movie.release_date}</span>
+                                        <span className="search-year">{(movie.release_date || "").slice(0, 4)}</span>
                                     </div>
                                 </button>
                             ))}
@@ -90,7 +95,13 @@ export const Navbar = () => {
                     )}
                 </div>
                 <div className="wishlist-box">
-                    <button type="button" onClick={() => setWishListOpen((v) => !v)} className="wishlist-button">Wishlist ({wishListMovies.length})</button>
+                    <button type="button" onClick={() => setWishListOpen((v) => !v)} className="wishlist-button">
+                        <span className="wishlist-icon">
+                            <Heart size={18}/>
+                            <span className="wishlist-count">{wishListMovies.length}</span>
+                        </span>
+                        <span className="wishlist-label">Wishlist</span>
+                    </button>
                     {wishListOpen && wishListMovies.length > 0 && (
                         <div className="wishlist-dropdown">
                             {wishListMovies.map((movie) => (
@@ -100,7 +111,7 @@ export const Navbar = () => {
                                     </button>
                                     <div className="wishlist-texts" onClick={() => handleSelect(movie.id)}>
                                         <span className="wishlist-title">{movie.title}</span>
-                                        <span className="wishlist-year">{movie.release_date}</span>
+                                        <span className="wishlist-year">{(movie.release_date || "").slice(0, 4)}</span>
                                     </div>
                                     <button type="button" onClick={() => dispatch(removeFromList(movie.id))}>X</button>
                                 </div>

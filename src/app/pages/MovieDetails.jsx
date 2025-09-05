@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleListMovie } from "../features/moviesSlice.js";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { fetchMovieDetails, fetchMovieCredits } from "../features/moviesThunks.js";
+import { Star } from "lucide-react";
 import "../../styles/movie-details.scss";
 
 const MovieDetails = () => {
@@ -25,6 +26,14 @@ const MovieDetails = () => {
     const director = credits?.crew?.find((c) => c.job === "Director");
     const producer = credits?.crew?.find((c) => c.job === "Producer");
 
+    const rating = Math.round((movie.vote_average || 0) * 10) / 10;
+    const budgetUSD = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0
+    }).format(movie.budget || 0);
+    const language = (movie.original_language || "").toUpperCase();
+
     return (
         <div className="movie-container">
             <div className="movie-details" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})` }}>
@@ -34,29 +43,39 @@ const MovieDetails = () => {
                 <div className="movie-info">
                     <div className="movie-content">
                         <div className="movie-header">
+                            <div className="rating-badge">
+                                <Star size={16} fill="#FFD700" stroke="#FFD700" />
+                                <span>{rating}</span>
+                            </div>
                             <h1>{movie.title}</h1>
                             <div className="extra-data">
-                                <h4>{movie.release_date}</h4>
-                                <h4>{movie.runtime} min</h4>
-                                <h4>{genres}</h4>
+                                <span className="meta-pill">{movie.release_date}</span>
+                                <span className="meta-sep">•</span>
+                                <span className="meta-pill">{movie.runtime} min</span>
+                                {genres && (
+                                <>
+                                    <span className="meta-sep">•</span>
+                                    <span className="meta-pill">{genres}</span>
+                                </>
+                                )}
                             </div>
-                        </div>
-                        <div className="button-actions">
-                            <button type="button" onClick={() => dispatch(toggleListMovie(movie))}>Add to Wishlist</button>
                         </div>
                         <div className="movie-overview">
                             <h2>Sinopsis</h2>
                             <p>{movie.overview}</p>
                             <div className="movie-creators">
                                 <div className="director">
-                                    <p>{director?.name || ""}</p>
                                     <h4>Director</h4>
+                                    <p>{director?.name || ""}</p>
                                 </div>
                                 <div className="producer">
-                                    <p>{producer?.name || ""}</p>
                                     <h4>Productor</h4>
+                                    <p>{producer?.name || ""}</p>
                                 </div>
                             </div>
+                        </div>
+                        <div className="details-button-actions">
+                            <button type="button" onClick={() => dispatch(toggleListMovie(movie))}>Add to Wishlist</button>
                         </div>
                     </div>
                 </div>
@@ -80,11 +99,11 @@ const MovieDetails = () => {
                     </div>
                     <div className="extra-details">
                         <h4>Presupuesto</h4>
-                        <p>${movie.budget}</p>
+                        <p>{budgetUSD}</p>
                     </div>
                     <div className="extra-details">
                         <h4>Idioma Original</h4>
-                        <p>{movie.original_language}</p>
+                        <p>{language}</p>
                     </div>
                 </div>
             </div>
