@@ -27,19 +27,14 @@ export const RatingSlider = ({ movies }) => {
             <div className="rated-list">
                 {moviesToShow.map(({movie, rank}) => (
                     <div className="top-card" key={movie.id}>
-
                         <div className="rank-wrap">
                             <div className="rank-number">{rank}</div>
                         </div>
-
                         <div className="poster-wrap">
                             <img src={getImgMovie(movie)} alt={movie.title} className="rank-poster"/>
                         </div>
-
                         <div className="rank-gap"></div>
-
                         <div className="rated-title">{movie.title}</div>
-
                         <div className="rated-actions">
                             <button className="score">{Math.round(movie.vote_average * 10) / 10}</button>
                             <button type="button" onClick={() => navigate(`/${movie.id}`)}><Info size={15} /></button>

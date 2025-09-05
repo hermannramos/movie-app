@@ -15,8 +15,6 @@
   display: inline-block;
   padding-bottom: 6px;
 }
-
-/* línea degradada debajo del título */
 .poster-slider > h2::after{
   content: "";
   position: absolute;

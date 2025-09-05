@@ -6,7 +6,6 @@
   line-height: 1.5;
   color: rgba(233,238,244,.9);
 }
-
 .button-actions button,
 .rated-actions button {
   font-family: 'Montserrat', sans-serif;
@@ -16,7 +15,6 @@
 .movie-container{
   margin: 0px auto;
 };
-
 .movie-details{
   position: relative;
   display: grid;
@@ -27,19 +25,14 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-
-  /* clave para que el overlay no afecte a la poster ni al texto */
   isolation: isolate;
-  color: #e9eef4;                 /* texto claro por defecto */
+  color: #e9eef4;
 }
-
-/* Capa de oscurecido + viñeta para legibilidad del texto */
 .movie-details::before{
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
-  /* degradado suave: más oscuro abajo donde va el texto */
   background:
     linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.45) 65%, rgba(0,0,0,0.65) 100%),
     radial-gradient(120% 80% at 50% 20%, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.75) 100%);
@@ -53,7 +46,6 @@
   line-height: 1.1;
   margin: 0 0 8px;
 }
-/* Badge de rating (estrella dorada + número) */
 .rating-badge{
   display: inline-flex;
   align-items: center;
@@ -69,8 +61,6 @@
   color: #FFD700;
   width: fit-content;
 }
-
-/* Pills meta (fecha · duración · géneros) */
 .extra-data{
   display: flex;
   align-items: center;
@@ -90,8 +80,6 @@
   opacity: .6;
   color: #cfd6e1;
 }
-
-/* Botón de wishlist del detalle: coherente con tu estilo */
 .details-button-actions{
   margin-top: 10px;
 }
@@ -146,23 +134,17 @@
   flex-direction: row;
   gap: 50px;
 };
-
-/* Layout inferior general */
 .extra-movie-info{
   display: grid;
   grid-template-columns: 1fr 25%;
   gap: 24px;
   padding: 3% 5%;
 }
-
-/* Sidebar en columnas limpias */
 .movie-sidebar{
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-
-/* Bloques de detalle */
 .extra-details{
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.10);
@@ -185,16 +167,11 @@
   color: rgba(233,238,244,.9);
   word-break: break-word;
 }
-
-
-/* Galería fluida y ordenada */
 .actors-gallery{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 14px;
 }
-
-/* Tarjeta de actor */
 .actor-card{
   display: flex;
   flex-direction: column;
@@ -203,23 +180,18 @@
   border: 1px solid rgba(255,255,255,0.10);
   border-radius: 12px;
   overflow: hidden;
-  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
 }
 .actor-card:hover{
   transform: translateY(-2px);
   background: rgba(255,255,255,0.08);
   box-shadow: 0 6px 18px rgba(0,0,0,.25);
 }
-
-/* Imagen 2:3 siempre limpia */
 .actor-card img{
   width: 100%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
   display: block;
 }
-
-/* Texto compacto y legible */
 .actor-info{
   padding: 8px 10px 10px;
 }
@@ -241,8 +213,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-
 .details-button-actions button{
   display: inline-flex;
   align-items: center;
@@ -253,29 +223,24 @@
   border-radius: 12px;
   border: none;
   cursor: pointer;
-
-  /* Colores del logo */
   background: linear-gradient(90deg, #A020F0 0%, #FF007F 100%);
   color: #fff;
-
   box-shadow: 0 4px 14px rgba(0,0,0,.25);
   transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
 }
-
 .details-button-actions button:hover{
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0,0,0,.35);
   opacity: 0.95;
 }
-
 @media (max-width: 900px){
   .movie-details{
-    grid-template-columns: 1fr;      /* poster arriba, texto debajo */
+    grid-template-columns: 1fr;
     gap: 28px;
     padding: 12% 6%;
   }
   .extra-movie-info{
-    grid-template-columns: 1fr;      /* galería y, debajo, sidebar */
+    grid-template-columns: 1fr;
     gap: 18px;
     padding: 6%;
   }
