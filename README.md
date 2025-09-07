@@ -1,12 +1,44 @@
-# React + Vite
+# 🎬 Movie App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web moderna para explorar películas populares, mejor valoradas y próximas a estrenarse.  
+Desarrollada con **React, Redux Toolkit, SCSS, Express y TMDB API**.
 
-Currently, two official plugins are available:
+## ✨ Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔍 **Buscador en tiempo real** de películas con dropdown interactivo.  
+- ❤️ **Wishlist** con icono de corazón dinámico (se ilumina en rojo al añadir).  
+- 🖼️ **Slider de banners** con animaciones y degradado moderno.  
+- 🏆 **Top Rated Movies** con diseño estilo Netflix (ranking numérico detrás de los pósters).  
+- 👤 **Vista de detalles** con sinopsis, reparto, director, productor y más.  
+- 🎨 **Diseño responsive** con tipografías modernas (*Montserrat* + *Inter*) y un **fondo oscuro degradado**.  
 
-## Expanding the ESLint configuration
+## 🖼️ Capturas de Pantalla
+<p align="center">
+  <img src="./src/assets/Movie-App-Home.png" alt="Movie App Home" height="400" />
+  <img src="./src/assets/Movie-App-details.png" alt="Movie App Details" height="400" />
+</p>
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Tecnologías
+
+- ⚛️ React + Vite  
+- 📦 Redux Toolkit  
+- 🎨 SCSS  
+- 🖥️ Express.js (servidor Node con proxy a la API de TMDB)  
+- 🎥 [TMDB API](https://www.themoviedb.org/documentation/api)  
+- 🎨 Iconos: [Lucide React](https://lucide.dev/)  
+
+## ⚡ Instalación y uso
+
+```bash
+# Clonar repositorio
+git clone https://github.com/tuusuario/movie-app.git
+cd movie-app
+
+# Instalar dependencias
+npm install
+
+# Ejecutar en modo desarrollo (cliente + servidor Express)
+npm run dev
+
+# Build para producción
+npm run build
