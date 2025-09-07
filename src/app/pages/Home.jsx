@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { BannerSlider } from "../components/BannerSlider.jsx";
 import { PosterSlider } from "../components/PosterSlider.jsx";
 import { RatingSlider } from "../components/RatingSlider.jsx";
-import { fetchPopularMovies, fetchPlayingNowMovies, fetchTopRatedMovies } from "../features/moviesThunks";
+import { fetchPopularMovies, fetchPlayingNowMovies, fetchTopRatedMovies } from "../features/moviesThunks.js";
 import "../../styles/home.scss";
+
 
 const Home = () => {
     const dispatch = useDispatch();

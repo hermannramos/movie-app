@@ -11,6 +11,7 @@ function getMovieImg(path){
     return `https://image.tmdb.org/t/p/w92${path}`;
 };
 
+
 export const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -59,7 +60,7 @@ export const Navbar = () => {
             <nav>
                 <ul className="nav-menu">
                     <li className="nav-group">
-                        <span className="nav-label" tabIndex={0}>Movies</span>
+                        <span className="nav-label">Movies</span>
                         <ul className="nav-sublist">
                             <li>Popular</li>
                             <li>Top Rated</li>

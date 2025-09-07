@@ -6,7 +6,7 @@ export const fetchPopularMovies = createAsyncThunk("movies/fetchPopularMovies", 
         throw new Error(`HTTP ${response.status}`);
     }
     const data = await response.json();
-    return data.results || [];
+    return data.results ?? [];
 });
 
 export const fetchTopRatedMovies = createAsyncThunk("movies/fetchTopRatedMovies", async(limit=10) => {
@@ -15,7 +15,7 @@ export const fetchTopRatedMovies = createAsyncThunk("movies/fetchTopRatedMovies"
         throw new Error(`HTTP ${response.status}`);
     }
     const data = await response.json();
-    return data.results || [];
+    return data.results ?? [];
 });
 
 export const fetchPlayingNowMovies = createAsyncThunk("movies/fetchPlayingNowMovies", async(limit=5) => {
@@ -24,7 +24,7 @@ export const fetchPlayingNowMovies = createAsyncThunk("movies/fetchPlayingNowMov
         throw new Error(`HTTP ${response.status}`);
     }
     const data = await response.json();
-    return data.results || [];
+    return data.results ?? [];
 });
 
 export const fetchMovieDetails = createAsyncThunk("movies/fetchMovieDetails", async(movieId) => {

@@ -2,7 +2,8 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
-};
+}
+
 .poster-slider > h2{
   position: relative;
   margin: 0 0 18px 4px;
@@ -15,6 +16,7 @@
   display: inline-block;
   padding-bottom: 6px;
 }
+
 .poster-slider > h2::after{
   content: "";
   position: absolute;
@@ -25,36 +27,41 @@
   border-radius: 2px;
   background: linear-gradient(90deg, #A020F0 0%, #FF007F 100%);
 }
+
 .poster-row{
   display: flex;
   gap: 14px;
   padding-inline: 6px;
-};
+}
+
 .carousel{
   display: flex;
   flex: 0 0 calc(25% - 10.5px);
   flex-direction: column;
-};
+}
+
 .poster-card{
   position: relative;
-  border: 15px;
   overflow: hidden;
   border-radius: 20px;
   border: none;
   box-shadow: 0 10px 18px rgba(0,0,0,.35);
   background: #0f141b;
-};
+}
+
 .poster-card:hover{
   transform: translateY(-4px);
   box-shadow: 0 14px 24px rgba(0,0,0,.45);
-};
+}
+
 .poster-img{
   display: block;
   width: 100%;
   aspect-ratio: 2/3;
   object-fit: cover;
   border: none;
-};
+}
+
 .poster-card::after{
   content: "";
   position: absolute;
@@ -62,7 +69,8 @@
   height: 48%;
   background: linear-gradient(0deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,0) 65%);
   pointer-events: none;
-};
+}
+
 .poster-title{
   position: absolute;
   z-index: 2;
@@ -80,27 +88,33 @@
   text-shadow: 0 1px 2px rgba(0,0,0,.6);
   overflow: hidden;
 }
+
 .poster-card:hover .poster-title{
   transform: translateY(-2px);
   background: rgba(0,0,0,.55);
 }
+
 .carousel-content{
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-top: 8px;
-};
+}
+
+.carousel-button-actions{
+  display: flex;
+  gap: 8px;
+}
+
 .carousel-button-actions .wishlist {
   color: #e9eef4;
   transition: color .2s ease;
 }
+
 .carousel-button-actions .wishlist.active {
   color: #e50914;
 }
-.carousel-button-actions{
-  display: flex;
-  gap: 8px;
-};
+
 .carousel-button-actions button{
   width: 36px;
   height: 36px;
@@ -111,11 +125,13 @@
   background: #1a212c;
   color: #e9eef4;
   cursor: pointer;
-};
+}
+
 .carousel-button-actions button:hover{
   background: #222b37;
   transform: translateY(-1px);
-};
+}
+
 .arrow{
   position: absolute;
   bottom: 8px;
@@ -128,16 +144,20 @@
   color: #fff;
   border: 1px solid rgba(255,255,255,.2);
   cursor: pointer;
-};
+}
+
 .arrow:hover{
   background: rgba(0,0,0,.7);
-};
+}
+
 .arrow-left{
   left: 8px;
-};
+}
+
 .arrow-right{
-  right: 8px;;
-};
+  right: 8px;
+}
+
 @media (max-width: 1100px){
   .carousel{ flex: 0 0 calc(33.333% - 9.4px); }
 }

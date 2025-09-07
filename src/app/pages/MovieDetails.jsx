@@ -6,6 +6,7 @@ import { fetchMovieDetails, fetchMovieCredits } from "../features/moviesThunks.j
 import { Star } from "lucide-react";
 import "../../styles/movie-details.scss";
 
+
 const MovieDetails = () => {
     const dispatch = useDispatch();
     const { movieId } = useParams();
@@ -13,7 +14,6 @@ const MovieDetails = () => {
     const movie = useSelector((state) => state.movies.movieDetails);
     const credits = useSelector((state) => state.movies.movieCredits);
 
-    
     useEffect(() => {
         dispatch(fetchMovieDetails(movieId))
         dispatch(fetchMovieCredits(movieId))
@@ -22,7 +22,7 @@ const MovieDetails = () => {
     if(!movie) return null;
     
     const castList = Array.isArray(credits?.cast) ? credits.cast.slice(0, 10) : [];
-    const genres = Array.isArray(movie.genres) ? movie.genres.slice(0, 3).map(g => g.name).join (", ") : "";
+    const genres = Array.isArray(movie.genres) ? movie.genres.slice(0, 3).map(g => g.name).join(", ") : "";
     const director = credits?.crew?.find((c) => c.job === "Director");
     const producer = credits?.crew?.find((c) => c.job === "Producer");
 

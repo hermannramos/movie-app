@@ -3,8 +3,8 @@ import 'dotenv/config';
 import express from 'express';
 
 const app = express();
-app.use(express.json());
 const port = Number(process.env.PORT) || 5180;
+app.use(express.json());
 
 app.get("/api/search", async (request, response) => {
     try{

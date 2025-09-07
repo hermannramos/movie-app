@@ -25,9 +25,9 @@ const moviesSlice = createSlice({
     reducers: {
         toggleListMovie(state, action) {
             const movie = action.payload;
-            const alreadyExists = state.wishList.find((m) => m.id === movie.id);
-            if(alreadyExists){
-                state.wishList = state.wishList.filter((m) => m.id !== movie.id);
+            const index = state.wishList.findIndex((m) => m.id === movie.id);
+            if(index >= 0){
+                state.wishList.splice(index, 1);
             } else {
                 state.wishList.push({
                     id: movie.id,
