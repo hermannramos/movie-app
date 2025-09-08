@@ -1,14 +1,13 @@
 # 🎬 Movie App
 
-Modern web application to explore popular, top-rated, and upcoming movies.  
-Built with **React, Redux Toolkit, SCSS, Express, Vite SSR Support, and TMDB API**.
+Modern web application to explore popular, top-rated, and now-playing movies.  
+Built as a project with **React, Redux Toolkit, SCSS, Express, Vite SSR Support, and TMDB API**.
 
 ## ✨ Features
 
 - 🔍 **Real-time movie search** with interactive dropdown.  
 - ❤️ **Wishlist** with dynamic heart icon (lights up in red when adding).  
-- 🖼️ **Banner slider** with smooth animations and modern gradient.  
-- 🏆 **Top Rated Movies** with Netflix-style design (ranking numbers behind posters).  
+- 🖼️ **Homepage with 3 carousels**: Popular, Top Rated, and Now Playing.  
 - 👤 **Movie details view** with synopsis, cast, director, producer, and more.  
 - 🎨 **Responsive design** with modern fonts (*Montserrat* + *Inter*) and a **dark gradient background**.  
 - ⚡ **Full SSR Support**: pages are rendered on the server first for faster load and SEO-friendly content.  
@@ -21,7 +20,7 @@ Built with **React, Redux Toolkit, SCSS, Express, Vite SSR Support, and TMDB API
 
 ## 🚀 Tech Stack
 
-- ⚛️ React + Vite (with **SSR setup**)  
+- ⚛️ React + Vite (with **custom SSR setup**)  
 - 📦 Redux Toolkit  
 - 🎨 SCSS  
 - 🖥️ Express.js (Node server with SSR + TMDB API proxy)  
@@ -46,4 +45,3 @@ npm run build
 
 # Preview production build (SSR + Express)
 npm run preview
-
