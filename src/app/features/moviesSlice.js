@@ -1,22 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchPopularMovies, fetchPlayingNowMovies, fetchTopRatedMovies, fetchMovieDetails, fetchMovieCredits } from "./moviesThunks.js";
 
-function loadListFromStorage(){
-    try {
-        const raw = localStorage.getItem("wishlist");
-        return raw ? JSON.parse(raw): [];
-    } catch {
-        return [];
-    }
-};
-
 const initialState = {
     popularMovies: [],
     nowPlayingMovies: [],
     topRatedMovies: [],
     movieDetails: null,
     movieCredits: null,
-    wishList: loadListFromStorage(),
+    wishList: [],
 };
 
 const moviesSlice = createSlice({
@@ -65,5 +56,5 @@ const moviesSlice = createSlice({
     },
 });
 
-export const { toggleListMovie, removeFromList, clearList } = moviesSlice.actions;
+export const { toggleListMovie, removeFromList, clearList, hydrateList } = moviesSlice.actions;
 export default moviesSlice.reducer;

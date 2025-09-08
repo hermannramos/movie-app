@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeFromList } from "../features/moviesSlice.js";
 
 import { Search, Heart } from "lucide-react";
-import LogoApp from "../../assets/logo-movie-app.png";
 import "../../styles/navbar.scss";
 
 function getMovieImg(path){
@@ -15,13 +14,22 @@ function getMovieImg(path){
 export const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const wishListMovies = useSelector((state) => state.movies.wishList);
+
+    const [isHydrated, setIsHydrated] = useState(false);
+
+    const wishListMovies = useSelector((state) => state.movies.wishList) || [];
 
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [wishListOpen, setWishListOpen] = useState(false);
 
     useEffect(() => {
+        setIsHydrated(true)
+    }, []);
+
+    useEffect(() => {
+        if (!isHydrated) return;
+        
         if(searchQuery.trim().length < 2){
             setSearchResults([]);
             return;
@@ -37,7 +45,7 @@ export const Navbar = () => {
             }
         }, 300);
         return () => clearTimeout(debounceTimerId);
-    }, [searchQuery]);
+    }, [isHydrated, searchQuery]);
 
     const handleSearch = (e) => {
         setSearchQuery(e.target.value);
@@ -54,7 +62,7 @@ export const Navbar = () => {
         <div className="container-header">
             <div className="logo">
                 <Link to="/">
-                    <img src={LogoApp} alt="" />
+                    <img src="/logo-movie-app.png" alt="Movie App" />
                 </Link>
             </div>
             <nav>

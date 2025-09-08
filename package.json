@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node src/server/server.js",
-    "build": "vite build",
+    "dev": "NODE_ENV=development node src/server/server.js",
+    "build": "vite build && vite build --ssr src/ssr/entry-server.jsx",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "NODE_ENV=production node src/server/server.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",

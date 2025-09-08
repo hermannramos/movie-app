@@ -1,6 +1,9 @@
 /* eslint-disable no-undef */
 import 'dotenv/config';
 import express from 'express';
+import fs from "fs";
+import path from "path";
+
 
 const app = express();
 const port = Number(process.env.PORT) || 5180;
@@ -146,7 +149,59 @@ app.get("/api/movies/:movieId/credits", async(request, response) => {
     }
 });
 
-app.use((error, _request, response) => {
+const isProd = process.env.NODE_ENV === 'production';
+if (!isProd) {
+  // --------- Desarrollo con Vite middleware ----------
+  const { createServer } = await import('vite');
+  const vite = await createServer({
+    server: { middlewareMode: true },
+    appType: 'custom',
+  });
+  app.use(vite.middlewares);
+
+  app.get(/^(?!\/api\/).*/, async (req, res) => {
+    try {
+      const url = req.originalUrl;
+      let template = await fs.promises.readFile(path.resolve('index.html'), 'utf-8');
+      template = await vite.transformIndexHtml(url, template);
+
+      const { render } = await vite.ssrLoadModule('/src/ssr/entry-server.jsx');
+      const { html } = await render(url);
+
+      const htmlOut = template.replace('<!--app-html-->', html);
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(htmlOut);
+    } catch (err) {
+      vite.ssrFixStacktrace(err);
+      console.error(err);
+      res.status(500).end(err.stack || String(err));
+    }
+  });
+} else {
+  // --------- Producción: servir build ----------
+  const compression = (await import('compression')).default;
+  const sirv = (await import('sirv')).default;
+
+  app.use(compression());
+  app.use(sirv('dist/client', { extensions: [] })); // no sirvas index automáticamente
+
+  const template = fs.readFileSync('dist/client/index.html', 'utf-8');
+  const { render } = await import(path.resolve('dist/server/entry-server.js'));
+
+  app.get(/^(?!\/api\/).*/, async (req, res) => {
+    try {
+      const { html } = await render(req.originalUrl);
+      const htmlOut = template.replace('<!--app-html-->', html);
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(htmlOut);
+    } catch (err) {
+      console.error(err);
+      res.status(500).end(err.stack || String(err));
+    }
+  });
+}
+
+
+/* eslint-disable-next-line no-unused-vars */
+app.use((error, _request, response, _next) => {
     console.error('[error]', error);
     response.status(500).json({error: 'Unexpected error'});
 });

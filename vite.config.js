@@ -7,6 +7,9 @@ export default defineConfig({
   server: {
     proxy: { '/api': 'http://localhost:5180' }
   },
+  ssr: {
+    noExternal: ['lucide-react']
+  },
   test: {
     globals: true,
     environment: 'jsdom',
