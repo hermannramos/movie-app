@@ -1,44 +1,49 @@
 # 🎬 Movie App
 
-Aplicación web moderna para explorar películas populares, mejor valoradas y próximas a estrenarse.  
-Desarrollada con **React, Redux Toolkit, SCSS, Express y TMDB API**.
+Modern web application to explore popular, top-rated, and upcoming movies.  
+Built with **React, Redux Toolkit, SCSS, Express, Vite SSR Support, and TMDB API**.
 
-## ✨ Características
+## ✨ Features
 
-- 🔍 **Buscador en tiempo real** de películas con dropdown interactivo.  
-- ❤️ **Wishlist** con icono de corazón dinámico (se ilumina en rojo al añadir).  
-- 🖼️ **Slider de banners** con animaciones y degradado moderno.  
-- 🏆 **Top Rated Movies** con diseño estilo Netflix (ranking numérico detrás de los pósters).  
-- 👤 **Vista de detalles** con sinopsis, reparto, director, productor y más.  
-- 🎨 **Diseño responsive** con tipografías modernas (*Montserrat* + *Inter*) y un **fondo oscuro degradado**.  
+- 🔍 **Real-time movie search** with interactive dropdown.  
+- ❤️ **Wishlist** with dynamic heart icon (lights up in red when adding).  
+- 🖼️ **Banner slider** with smooth animations and modern gradient.  
+- 🏆 **Top Rated Movies** with Netflix-style design (ranking numbers behind posters).  
+- 👤 **Movie details view** with synopsis, cast, director, producer, and more.  
+- 🎨 **Responsive design** with modern fonts (*Montserrat* + *Inter*) and a **dark gradient background**.  
+- ⚡ **Full SSR Support**: pages are rendered on the server first for faster load and SEO-friendly content.  
 
-## 🖼️ Capturas de Pantalla
+## 🖼️ Screenshots
 <p align="center">
   <img src="./src/assets/Movie-App-Home.png" alt="Movie App Home" height="400" />
   <img src="./src/assets/Movie-App-details.png" alt="Movie App Details" height="400" />
 </p>
 
-## 🚀 Tecnologías
+## 🚀 Tech Stack
 
-- ⚛️ React + Vite  
+- ⚛️ React + Vite (with **SSR setup**)  
 - 📦 Redux Toolkit  
 - 🎨 SCSS  
-- 🖥️ Express.js (servidor Node con proxy a la API de TMDB)  
+- 🖥️ Express.js (Node server with SSR + TMDB API proxy)  
 - 🎥 [TMDB API](https://www.themoviedb.org/documentation/api)  
-- 🎨 Iconos: [Lucide React](https://lucide.dev/)  
+- 🎨 Icons: [Lucide React](https://lucide.dev/)  
 
-## ⚡ Instalación y uso
+## ⚡ Installation & Usage
 
 ```bash
-# Clonar repositorio
-git clone https://github.com/tuusuario/movie-app.git
+# Clone repository
+git clone https://github.com/yourusername/movie-app.git
 cd movie-app
 
-# Instalar dependencias
+# Install dependencies
 npm install
 
-# Ejecutar en modo desarrollo (cliente + servidor Express)
+# Run in development (SSR + Express + client)
 npm run dev
 
-# Build para producción
+# Build for production
 npm run build
+
+# Preview production build (SSR + Express)
+npm run preview
+
