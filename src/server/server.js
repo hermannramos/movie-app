@@ -151,7 +151,6 @@ app.get("/api/movies/:movieId/credits", async(request, response) => {
 
 const isProd = process.env.NODE_ENV === 'production';
 if (!isProd) {
-  // --------- Desarrollo con Vite middleware ----------
   const { createServer } = await import('vite');
   const vite = await createServer({
     server: { middlewareMode: true },
@@ -159,9 +158,9 @@ if (!isProd) {
   });
   app.use(vite.middlewares);
 
-  app.get(/^(?!\/api\/).*/, async (req, res) => {
+  app.get('*all', async (request, response) => {
     try {
-      const url = req.originalUrl;
+      const url = request.originalUrl;
       let template = await fs.promises.readFile(path.resolve('index.html'), 'utf-8');
       template = await vite.transformIndexHtml(url, template);
 
@@ -169,36 +168,34 @@ if (!isProd) {
       const { html } = await render(url);
 
       const htmlOut = template.replace('<!--app-html-->', html);
-      res.status(200).set({ 'Content-Type': 'text/html' }).end(htmlOut);
-    } catch (err) {
-      vite.ssrFixStacktrace(err);
-      console.error(err);
-      res.status(500).end(err.stack || String(err));
+      response.status(200).set({ 'Content-Type': 'text/html' }).end(htmlOut);
+    } catch (error) {
+      vite.ssrFixStacktrace(error);
+      console.error(error);
+      res.status(500).end(error.stack || String(error));
     }
   });
 } else {
-  // --------- Producción: servir build ----------
   const compression = (await import('compression')).default;
   const sirv = (await import('sirv')).default;
 
   app.use(compression());
-  app.use(sirv('dist/client', { extensions: [] })); // no sirvas index automáticamente
+  app.use(sirv('dist/client', { extensions: [] }));
 
   const template = fs.readFileSync('dist/client/index.html', 'utf-8');
   const { render } = await import(path.resolve('dist/server/entry-server.js'));
 
-  app.get(/^(?!\/api\/).*/, async (req, res) => {
+  app.get('*all', async (request, response) => {
     try {
-      const { html } = await render(req.originalUrl);
+      const { html } = await render(request.originalUrl);
       const htmlOut = template.replace('<!--app-html-->', html);
-      res.status(200).set({ 'Content-Type': 'text/html' }).end(htmlOut);
-    } catch (err) {
-      console.error(err);
-      res.status(500).end(err.stack || String(err));
+      response.status(200).set({ 'Content-Type': 'text/html' }).end(htmlOut);
+    } catch (error) {
+      console.error(error);
+      response.status(500).end(error.stack || String(error));
     }
   });
-}
-
+};
 
 /* eslint-disable-next-line no-unused-vars */
 app.use((error, _request, response, _next) => {

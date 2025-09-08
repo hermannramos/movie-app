@@ -9,11 +9,13 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 
 const app = (
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
+  <StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </StrictMode>
 );
 
 const rootElement = document.getElementById("root");
